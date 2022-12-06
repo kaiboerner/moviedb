@@ -15,7 +15,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Kaiboerner\\Moviedb\\": "src/"
+            "KaiBoerner\\MovieDb\\": "src/"
         }
     },
     "authors": [
