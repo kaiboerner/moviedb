@@ -2,6 +2,8 @@
 
 # basic bootstrapping
 
+namespace KaiBoerner\MovieDb;
+
 use DI\ContainerBuilder;
 use Psr\Container\ContainerInterface;
 
