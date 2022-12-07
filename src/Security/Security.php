@@ -80,6 +80,8 @@ final class Security implements SecurityInterface
 
     public function logout(): bool
     {
+        $this->initialize();
+
         $this->user = null;
         session_unset();
         session_regenerate_id(true);
