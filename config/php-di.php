@@ -7,6 +7,8 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\ORMSetup;
 use KaiBoerner\MovieDb\Security\Security;
 use KaiBoerner\MovieDb\Security\SecurityInterface;
+use KaiBoerner\MovieDb\Templating\TemplateEngine;
+use KaiBoerner\MovieDb\Templating\SmartyTemplateEngine;
 use Psr\Container\ContainerInterface;
 
 return [
@@ -25,4 +27,14 @@ return [
     EntityManagerInterface::class => DI\get(EntityManager::class),
 
     SecurityInterface::class => DI\get(Security::class)
+
+    \Smarty::class => function (ContainerInterface $container): \Smarty {
+        $smarty = new \Smarty();
+        $smarty->compile_dir = DIR_TEMPLATES_C;
+        $smarty->templates_dir = DIR_TEMPLATES;
+
+        return $smarty;
+    },
+
+    TemplateEngine::class => DI\get(SmartyTemplateEngine::class)
 ];
