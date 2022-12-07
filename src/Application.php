@@ -10,16 +10,13 @@ use KaiBoerner\MovieDb\Controller\IndexController;
  */
 final class Application
 {
-    public function run(): void
+    public function run(string $controllerName, string $action): void
     {
-        $action = empty($_REQUEST['action']) ? 'index' : strtolower($_REQUEST['action']);
-        # new_movie should become NewMovie
-        $action = implode('', array_map('ucfirst', preg_split('/[^a-z0-9]/', $action)));
-        $controller = getContainer()->get("\\KaiBoerner\\MovieDb\\Controller\\${action}Controller");
+        $controllerName = implode('', array_map('ucfirst', preg_split('/[^a-z0-9]/', strtolower($controllerName))));
+        $controller = getContainer()->get("\\KaiBoerner\\MovieDb\\Controller\\${controllerName}Controller");
 
-        $task = empty($_REQUEST['task']) ? 'index' : strtolower($_REQUEST['task']);
-        $task = lcfirst(implode('', array_map('ucfirst', preg_split('/[^a-z0-9]/', $task))));
+        $action = lcfirst(implode('', array_map('ucfirst', preg_split('/[^a-z0-9]/', strtolower($action)))));
 
-        $controller->{$task . 'Action'}();
+        $controller->{$action . 'Action'}();
     }
 }
