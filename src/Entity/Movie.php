@@ -3,6 +3,7 @@
 namespace KaiBoerner\MovieDb\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use KaiBoerner\MovieDb\Security\UserInterface;
 
 /**
  * Movie
@@ -94,5 +95,17 @@ class Movie
         $this->createdBy = $createdBy;
 
         return $this;
+    }
+
+    // additional
+
+    public function isEditAllowed(UserInterface $user): bool
+    {
+        return null === $this->createdBy || $this->createdBy->equals($user);
+    }
+
+    public function isDeleteAllowed(UserInterface $user): bool
+    {
+        return $this->isEditAllowed($user);
     }
 }

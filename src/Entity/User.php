@@ -57,4 +57,9 @@ class User implements UserInterface
 
         return $this;
     }
+
+    public function equals(UserInterface $other): bool
+    {
+        return $this->name == $other->getName();
+    }
 }
