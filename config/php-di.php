@@ -5,6 +5,8 @@
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\ORMSetup;
+use KaiBoerner\MovieDb\Security\Security;
+use KaiBoerner\MovieDb\Security\SecurityInterface;
 use Psr\Container\ContainerInterface;
 
 return [
@@ -20,5 +22,7 @@ return [
 
     },
 
-    EntityManagerInterface::class => DI\get(EntityManager::class)
+    EntityManagerInterface::class => DI\get(EntityManager::class),
+
+    SecurityInterface::class => DI\get(Security::class)
 ];
