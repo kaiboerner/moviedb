@@ -10,6 +10,7 @@ use KaiBoerner\MovieDb\Security\SecurityInterface;
 use KaiBoerner\MovieDb\Templating\TemplateEngine;
 use KaiBoerner\MovieDb\Templating\SmartyTemplateEngine;
 use Psr\Container\ContainerInterface;
+use Smarty;
 
 return [
     EntityManager::class => function (ContainerInterface $container): EntityManagerInterface {
@@ -26,10 +27,10 @@ return [
 
     EntityManagerInterface::class => DI\get(EntityManager::class),
 
-    SecurityInterface::class => DI\get(Security::class)
+    SecurityInterface::class => DI\get(Security::class),
 
-    \Smarty::class => function (ContainerInterface $container): \Smarty {
-        $smarty = new \Smarty();
+    Smarty::class => function (ContainerInterface $container): Smarty {
+        $smarty = new Smarty();
         $smarty->compile_dir = DIR_TEMPLATES_C;
         $smarty->templates_dir = DIR_TEMPLATES;
 
