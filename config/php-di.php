@@ -10,9 +10,9 @@ use Psr\Container\ContainerInterface;
 return [
     EntityManager::class => function (ContainerInterface $container): EntityManagerInterface {
         $paths = [ 'src/Entity' ];
-        $isDevMode = 'prod' !== DI\env('APP_ENV');
+        $isDevMode = 'prod' !== APP_ENV;
         $dbParams = [
-            'url'   => DI\env('DATABASE_DSN')
+            'url'   => DATABASE_DSN
         ];
         $config = ORMSetup::createAttributeMetadataConfiguration($paths, $isDevMode);
 

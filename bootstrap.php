@@ -8,6 +8,7 @@ use DI\ContainerBuilder;
 use Psr\Container\ContainerInterface;
 
 require_once __DIR__ . '/vendor/autoload.php';
+require_once __DIR__ . '/config/config.php';
 
 /**
  * Initiallizing Dependency Injection
@@ -18,7 +19,7 @@ function getContainer(): ContainerInterface
 
     if (null === $container) {
         $containerBuilder = new ContainerBuilder();
-        $containerBuilder->addDefinitions(__DIR__ . '/config/config.php');
+        $containerBuilder->addDefinitions(__DIR__ . '/config/php-di.php');
         $container = $containerBuilder->build();
     }
 
