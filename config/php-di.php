@@ -31,8 +31,9 @@ return [
 
     Smarty::class => function (ContainerInterface $container): Smarty {
         $smarty = new Smarty();
-        $smarty->compile_dir = DIR_TEMPLATES_C;
-        $smarty->templates_dir = DIR_TEMPLATES;
+        $smarty->setCompileDir(DIR_TEMPLATES_C);
+        $smarty->setTemplateDir(DIR_TEMPLATES);
+        $smarty->addPluginsDir(DIR_PLUGINS);
 
         return $smarty;
     },
