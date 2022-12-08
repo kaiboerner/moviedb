@@ -10,7 +10,6 @@ use KaiBoerner\MovieDb\Security\SecurityInterface;
 use KaiBoerner\MovieDb\Templating\TemplateEngine;
 use KaiBoerner\MovieDb\Templating\SmartyTemplateEngine;
 use Psr\Container\ContainerInterface;
-use Smarty;
 
 return [
     EntityManager::class => function (ContainerInterface $container): EntityManagerInterface {
