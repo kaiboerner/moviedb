@@ -22,6 +22,17 @@
             "KaiBoerner\\MovieDb\\": "src/"
         }
     },
+    "scripts": {
+        "auto-scripts": {
+            "./vendor/bin/doctrine-migrations migrations:migrate -n": "script"
+        },
+        "post-install-cmd": [
+            "@auto-scripts"
+        ],
+        "post-update-cmd": [
+            "@auto-scripts"
+        ]
+    },
     "authors": [
         {
             "name": "Kai Börner",
