@@ -29,7 +29,7 @@ final class Security implements SecurityInterface
                     break;
 
                 case PHP_SESSION_DISABLED:
-                    throw new Exception("sessions are disabled");
+                    throw new \Exception("sessions are disabled");
 
                 case PHP_SESSION_NONE:
                     session_start();
