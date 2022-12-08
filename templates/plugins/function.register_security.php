@@ -7,9 +7,8 @@ function smarty_function_register_security(array $params, Smarty_Internal_Templa
 {
     $security = getContainer()->get(SecurityInterface::class);
 
-    $template->registerObject('security', $security, ['getCurrentUser', 'isLoggedIn']);
-
-    $isLoggedIn = $security->isLoggedIn();
-    $currentUser = $isLoggedIn ? $security->getCurrentUser() : null;
-    $template->assign(['currentUser' => $currentUser, 'isLoggedIn' => $isLoggedIn]);
+    $template->assign([
+        'currentUser' => $security->getCurrentUser(),
+        'isLoggedIn' => $security->isLoggedIn()
+    ]);
 }
