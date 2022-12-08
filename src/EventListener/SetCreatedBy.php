@@ -12,7 +12,7 @@ use KaiBoerner\MovieDb\Security\UserInterface;
 
 final class SetCreatedBy implements EventSubscriber
 {
-    public function __construct(private SecurityInterface security)
+    public function __construct(private SecurityInterface $security)
     {}
 
     /**
@@ -34,7 +34,7 @@ final class SetCreatedBy implements EventSubscriber
             return;
         }
 
-        $entityManager = $event->getEntityManager();
+        $entityManager = $event->getObjectManager();
         $unitOfWork = $entityManager->getUnitOfWork();
 
         $setCreatedBy = function (HasCreatedBy $entity) use ($entityManager, $unitOfWork, $user) {
@@ -46,7 +46,7 @@ final class SetCreatedBy implements EventSubscriber
                 $entityManager->getClassMetadata(get_class($entity)),
                 $entity
             );
-        }
+        };
 
         foreach ($unitOfWork->getScheduledEntityInsertions() as $entity) {
             if ($entity instanceof HasCreatedBy) {
@@ -54,7 +54,7 @@ final class SetCreatedBy implements EventSubscriber
             }
         }
 
-        foreach ($this->unitOfWork->getScheduledEntityUpdates() as $entity) {
+        foreach ($unitOfWork->getScheduledEntityUpdates() as $entity) {
             if ($entity instanceof HasCreatedBy) {
                 $setCreatedBy($entity);
             }
