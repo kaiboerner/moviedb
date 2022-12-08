@@ -10,7 +10,7 @@ use KaiBoerner\MovieDb\Security\UserInterface;
  */
  #[ORM\Table(name: "movie")]
  #[ORM\Entity]
-class Movie
+class Movie implements HasCreatedBy
 {
     #[ORM\Column(name: "id", type: "integer", nullable: false, options: array("unsigned" => true))]
     #[ORM\Id]
@@ -85,12 +85,12 @@ class Movie
         return $this->created;
     }
 
-    public function getCreatedBy(): ?User
+    public function getCreatedBy(): ?UserInterface
     {
         return $this->createdBy;
     }
 
-    public function setCreatedBy(User $createdBy): self
+    public function setCreatedBy(UserInterface $createdBy): self
     {
         $this->createdBy = $createdBy;
 
