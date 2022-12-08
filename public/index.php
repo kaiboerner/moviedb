@@ -1,7 +1,6 @@
 <?php
 
-use KaiBoerner\MovieDb\Application;
-use function KaiBoerner\MovieDb\getContainer;
+namespace KaiBoerner\MovieDb;
 
 require_once __DIR__ . '/../bootstrap.php';
 

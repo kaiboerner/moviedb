@@ -1,8 +1,9 @@
 <?php
 
+namespace KaiBoerner\MovieDb;
+
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Tools\Console\ConsoleRunner;
-use function KaiBoerner\MovieDb\getContainer;
 
 require_once __DIR__ . '/../bootstrap.php';
 
