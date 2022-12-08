@@ -17,6 +17,8 @@ final class Security implements SecurityInterface
 
     public function getCurrentUser(): ?UserInterface
     {
+        $this->initialize();
+        
         return $this->user;
     }
 
