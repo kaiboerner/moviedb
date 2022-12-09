@@ -19,8 +19,8 @@
 
     </head>
     <body>
-        {block "navigation"}{include "_navigation.html"}{/block}
-        {block "messages"}{include "_messages.html"}{/block}
+        {block "navigation"}{include "_navigation.html.tpl"}{/block}
+        {block "messages"}{include "_messages.html.tpl"}{/block}
         <div class="container-fluid">
             {block "body"}{/block}
         </div>

@@ -1,4 +1,4 @@
-{extends "_base.html"}
+{extends "_base.html.tpl"}
 
 {block "body"}
     <form action="?controller=security&action=login" method="post">

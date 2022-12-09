@@ -16,6 +16,6 @@ final class SmartyTemplateEngine implements TemplateEngine
         if (!empty($vars)) {
             $this->smarty->assign($vars);
         }
-        $this->smarty->display($template);
+        $this->smarty->display("$template.tpl");
     }
 }
