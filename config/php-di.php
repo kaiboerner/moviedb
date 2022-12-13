@@ -3,8 +3,7 @@
 namespace KaiBoerner\MovieDb;
 
 # return the config used by php-di
-
-use Doctrine\Common\EventManager;
+          
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\ORMSetup;
