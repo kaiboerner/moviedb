@@ -3,8 +3,10 @@
 namespace KaiBoerner\MovieDb\EventListener;
 
 use Doctrine\Common\EventSubscriber;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Event\OnFlushEventArgs;
 use Doctrine\ORM\Events;
+use Doctrine\ORM\Mapping\Entity;
 use KaiBoerner\MovieDb\Entity\HasCreatedBy;
 use KaiBoerner\MovieDb\Security\SecurityInterface;
 use KaiBoerner\MovieDb\Security\UserInterface;
@@ -12,8 +14,12 @@ use KaiBoerner\MovieDb\Security\UserInterface;
 
 final class SetCreatedBy implements EventSubscriber
 {
-    public function __construct(private SecurityInterface $security)
-    {}
+    public function __construct(
+        EntityManagerInterface $entityManager,
+        private SecurityInterface $security
+    ) {
+        $entityManager->getEventManager()->addEventSubscriber($this);
+    }
 
     /**
     * {@inheritDoc}
