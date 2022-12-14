@@ -23,10 +23,12 @@ function getContainer(): ContainerInterface
         $container = $containerBuilder->build();
 
         // register event listeners
-        $namespace = "KaiBoerner\\MovieDb\\EventListener";
         foreach (glob(__DIR__ . '/src/EventListener/*.php') as $file) {
             $className = preg_replace('/\\.php$/', '', basename($file));
-            $container->get("$namespace\\$className");
+            $class = new \ReflectionClass("KaiBoerner\\MovieDb\\EventListener\\$className");
+            if ($class->isInstantiable()) {
+                $container->get($class->getName());
+            }
         }
     }
 
