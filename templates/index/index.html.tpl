@@ -1,13 +1,6 @@
 {extends "_base.html.tpl"}
 
 {block "body"}
-    <pre>
-        count: {$count}
-        listSize: {$listSize}
-        pages: {$pages}
-        page: {$page}
-        movies: {$movies}
-    </pre>
     {$pageHref = "?page="}
 
     {capture "page_navigation"}
