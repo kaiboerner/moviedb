@@ -10,6 +10,12 @@ use KaiBoerner\MovieDb\Controller\IndexController;
  */
 final class Application
 {
+    public function redirect(string $controllerName, string $action): void
+    {
+        header("Location: ?controller=$controllerName&action=$action");
+        exit();
+    }
+
     public function run(string $controllerName, string $action): void
     {
         $controllerName = implode('', array_map('ucfirst', preg_split('/[^a-z0-9]/', strtolower($controllerName))));
