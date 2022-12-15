@@ -4,7 +4,6 @@ namespace KaiBoerner\MovieDb\Entity;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\ORM\Mapping\Entity;
 use KaiBoerner\MovieDb\Security\UserInterface;
 
 /**
