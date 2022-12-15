@@ -19,26 +19,6 @@ final class MovieController
     )
     {}
 
-    private function arrayToMovie(Movie $movie, array $data): bool
-    {
-        foreach ($data as $i => $v) {
-            switch ($i) {
-                case 'title':
-                    $movie->setTitle($v);
-                    break;
-
-                case 'publication':
-                    $movie->setPublication(new \DateTimeImmutable($v));
-                    break;
-
-                case 'regisseur':
-                    $movie->setRegisseur($v);
-                    break;
-            }
-        }
-        return $movie->isValid();
-    }
-
     public function newAction(): void
     {
         if (!$this->security->isLoggedIn()) {
@@ -49,7 +29,12 @@ final class MovieController
         $messages = [];
         $movie = new Movie();
         if (isset($_POST['movie']) && is_array($_POST['movie'])) {
-            //
+            $movie->acceptFormData($_POST['movie']);
+            if (!$movie->isValid()) {
+                $messages[] = ['type' => 'error', 'text' => 'Fehlerhafte Daten'];
+            } elseif (!$movie->isUnique($this->entityManager)) {
+                $messages[] = ['type' => 'error', 'text' => 'Der Film ist bereits im Archiv'];
+            }
         }
         $this->templateEngine->render('movie/new.html', [
             'messages' => $messages,

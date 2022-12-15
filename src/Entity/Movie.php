@@ -2,7 +2,9 @@
 
 namespace KaiBoerner\MovieDb\Entity;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\Entity;
 use KaiBoerner\MovieDb\Security\UserInterface;
 
 /**
@@ -15,7 +17,7 @@ class Movie implements HasCreatedBy
     #[ORM\Column(name: "id", type: "integer", nullable: false, options: array("unsigned" => true))]
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy: "IDENTITY")]
-    private ?int $id;
+    private ?int $id = null;
 
     #[ORM\Column(name: "title", type: "string", length: 255, nullable: false)]
     private string $title = '';
@@ -24,14 +26,14 @@ class Movie implements HasCreatedBy
     private string $regisseur = '';
 
     #[ORM\Column(name: "publication", type: "date_immutable", nullable: false)]
-    private \DateTimeImmutable $publication;
+    private ?\DateTimeImmutable $publication = null;
 
     #[ORM\Column(name: "created", type: "datetime_immutable", nullable: false)]
     private \DateTimeImmutable $created;
 
     #[ORM\ManyToOne(targetEntity: "KaiBoerner\MovieDb\Entity\User")]
     #[ORM\JoinColumn(name: "created_by", referencedColumnName: "id")]
-    private User $createdBy;
+    private ?User $createdBy = null;
 
 
     public function __construct()
@@ -99,6 +101,27 @@ class Movie implements HasCreatedBy
 
     // additional
 
+    public function acceptFormData(array $data): self
+    {
+        foreach ($data as $i => $v) {
+            switch ($i) {
+                case 'title':
+                    $this->setTitle($v);
+                    break;
+
+                case 'publication':
+                    $this->setPublication(new \DateTimeImmutable($v));
+                    break;
+
+                case 'regisseur':
+                    $this->setRegisseur($v);
+                    break;
+            }
+        }
+
+        return $this;
+    }
+
     public function isDeleteAllowed(UserInterface $user): bool
     {
         return $this->isEditAllowed($user);
@@ -109,18 +132,23 @@ class Movie implements HasCreatedBy
         return null === $this->createdBy || $this->createdBy->equals($user);
     }
 
+    public function isUnique(EntityManagerInterface $entityManager): bool
+    {
+        $existing = $entityManager
+            ->getRepository(self::class)
+            ->findOneBy(['title' => $this->title])
+        ;
+
+        return empty($existing) || $existing->id === $this->id;
+    }
+
     public function isValid(): bool
     {
-        if (
-            empty($this->title)
-            || empty($this->regisseur)
-            || empty($this->publication)
-            || mb_strlen($this->title) > 255
-            || mb_strlen($this->regisseur) > 127
-        ) {
-            return false;
-        }
-        
-        return true;
+        return !empty($this->title)
+            && !empty($this->regisseur)
+            && !empty($this->publication)
+            && mb_strlen($this->title) <= 255
+            && mb_strlen($this->regisseur) <= 127
+        ;
     }
 }
