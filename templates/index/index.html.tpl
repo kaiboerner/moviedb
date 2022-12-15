@@ -48,6 +48,29 @@
         <div class="card-body">
             <ul class="list-group">
                 {foreach $movies as $movie}
+                    {$edit = $isLoggedIn  && $movie->isEditAllowed($currentUser)}
+                    {$delete = $isLoggedIn  && $movie->isDeleteAllowed($currentUser)}
+
+                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                        <div class="ms-2 me-auto">
+                            <div class="fw-bold">{$movie->getTitle()}</div>
+                            <div>Regisseur: {$movie->getRegisseur()}</div>
+                            <div>veröffentlicht: {$movie->getPublication()|date_format:'%a., %d. %B %Y'}</div>
+                        </div>
+                        <div>
+                            <div><small>{$movie->getCreated()|date_format:'%a., %d.%m.%Y %H:%M'} ({$movie->getCreatedBy()})</small></div>
+                            {if $edit || $delete}
+                                <div class="btn-group">
+                                    {if $edit}
+                                        <a class="btn btn-secondary" href="?controller=movie&action=edit&id={$movie->getId()}" title="Bearbeiten"><i class="fas fa-edit"></i></a>
+                                    {/if}
+                                    {if $delete}
+                                        <a class="btn btn-danger" href="?controller=movie&action=delete&id={$movie->getId()}" onclick="return confirm('Wollen Sie den Film wirklich löschen?');" title="Löschen"><i class="fas fa-trash"></i></a>
+                                    {/if}
+                                </div>
+                            {/if}
+                        </div>
+                    </li>
                 {foreachelse}
                     <li class="list-group-item disabled">
                         <i class="fas fa-sad-tear"></i> Das Filmarchiv ist noch leer
