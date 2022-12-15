@@ -99,13 +99,28 @@ class Movie implements HasCreatedBy
 
     // additional
 
+    public function isDeleteAllowed(UserInterface $user): bool
+    {
+        return $this->isEditAllowed($user);
+    }
+
     public function isEditAllowed(UserInterface $user): bool
     {
         return null === $this->createdBy || $this->createdBy->equals($user);
     }
 
-    public function isDeleteAllowed(UserInterface $user): bool
+    public function isValid(): bool
     {
-        return $this->isEditAllowed($user);
+        if (
+            empty($this->title)
+            || empty($this->regisseur)
+            || empty($this->publication)
+            || mb_strlen($this->title) > 255
+            || mb_strlen($this->regisseur) > 127
+        ) {
+            return false;
+        }
+        
+        return true;
     }
 }
