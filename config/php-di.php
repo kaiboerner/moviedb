@@ -11,6 +11,8 @@ use KaiBoerner\MovieDb\Security\Security;
 use KaiBoerner\MovieDb\Security\SecurityInterface;
 use KaiBoerner\MovieDb\Templating\TemplateEngine;
 use KaiBoerner\MovieDb\Templating\SmartyTemplateEngine;
+use KaiBoerner\MovieDb\Util\MessageQueue;
+use KaiBoerner\MovieDb\Util\SessionMessageQueue;
 use Psr\Container\ContainerInterface;
 use Smarty;
 use function DI\get;
@@ -28,6 +30,8 @@ return [
     },
 
     EntityManagerInterface::class => get(EntityManager::class),
+
+    MessageQueue::class => get(SessionMessageQueue::class),
 
     SecurityInterface::class => get(Security::class),
 
