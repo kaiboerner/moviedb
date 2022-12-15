@@ -2,8 +2,10 @@
 
 namespace KaiBoerner\MovieDb\Controller;
 
+use KaiBoerner\MovieDb\Application;
 use KaiBoerner\MovieDb\Security\SecurityInterface;
 use KaiBoerner\MovieDb\Templating\TemplateEngine;
+use KaiBoerner\MovieDb\Util\MessageQueue;
 
 /**
  * Controller for login/logout
@@ -11,6 +13,8 @@ use KaiBoerner\MovieDb\Templating\TemplateEngine;
 final class SecurityController
 {
     public function __construct(
+        private Application $application,
+        private MessageQueue $messageQueue,
         private SecurityInterface $security,
         private TemplateEngine $templateEngine
     )
@@ -18,22 +22,21 @@ final class SecurityController
 
     public function loginAction(): void
     {
-        $messages = [];
         if (!empty($_POST['login'] && is_array($_POST['login']))) {
             $form = $_POST['login'];
             if ($this->security->login($form['name'], $form['password'])) {
-                header('Location: ?');
-                exit();
+                $this->messageQueue->addSuccessMessage("Sie wurden erfolgreich angemeldet.");
+                $this->application->redirect('index', 'index');
             }
-            $messages[] = ['type' => 'error', 'text' => 'fehlerhafte Logindaten'];
+            $this->messageQueue->addErrorMessage("Ihre Anmeldung ist fehlgeschlagen.");
         }
-        $this->templateEngine->render('security/login.html', ['messages' => $messages]);
+        $this->templateEngine->render('security/login.html');
     }
 
     public function logoutAction(): void
     {
         $this->security->logout();
-        header('Location: ?');
-        exit();
+        $this->messageQueue->addSuccessMessage("Sie wurden abgemeldet.");
+        $this->application->redirect('index', 'index');
     }
 }
