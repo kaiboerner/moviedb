@@ -22,7 +22,7 @@ final class SecurityController
 
     public function loginAction(): void
     {
-        if (!empty($_POST['login'] && is_array($_POST['login']))) {
+        if (isset($_POST['login']) && is_array($_POST['login'])) {
             $form = $_POST['login'];
             if ($this->security->login($form['name'], $form['password'])) {
                 $this->messageQueue->addSuccessMessage("Sie wurden erfolgreich angemeldet.");
