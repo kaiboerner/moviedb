@@ -9,16 +9,12 @@
 
             <div class="card-body">
                 <div class="mb-3">
-                    <label class="form-label">
-                        Name
-                        <input class="form-control" name="login[name]">
-                    </label>
+                    <label class="form-label" for="login[name]">Name</label>
+                    <input class="form-control" id="login[name]" name="login[name]">
                 </div>
                 <div class="mb-3">
-                    <label class="form-label">
-                        Kennwort
-                        <input class="form-control" name="login[password]" type="password">
-                    </label>
+                    <label class="form-label" for="login[password]">Kennwort</label>
+                    <input class="form-control" name="login[password]" type="password">
                 </div>
             </div>
 
