@@ -5,10 +5,10 @@ namespace KaiBoerner\MovieDb\Util;
 /**
  * type of a message
  */
-enum MessageType: string
+enum MessageType
 {
-    case SUCCESS = 'success';
-    case INFO = 'info';
-    case WARNING = 'warning';
-    case ERROR = 'error';
+    case SUCCESS;
+    case INFO;
+    case WARNING;
+    case ERROR;
 }

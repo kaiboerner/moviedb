@@ -13,23 +13,8 @@ final class Message
     )
     {}
 
-    public function isSuccess(): bool
+    public function __toString(): string
     {
-        return $this->type === MessageType::SUCCESS;
-    }
-
-    public function isInfo(): bool
-    {
-        return $this->type === MessageType::INFO;
-    }
-
-    public function isWarning(): bool
-    {
-        return $this->type === MessageType::WARNING;
-    }
-
-    public function isError(): bool
-    {
-        return $this->type === MessageType::ERROR;
+        return $this->text;
     }
 }
