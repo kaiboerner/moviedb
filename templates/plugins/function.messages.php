@@ -2,12 +2,13 @@
 
 use KaiBoerner\MovieDb\Util\MessageQueue;
 use KaiBoerner\MovieDb\Util\MessageType;
-use function KaiBoerner\MovieDb\getContainer;
+
+use function KaiBoerner\MovieDb\getDIContainer;
 
 function smarty_function_messages(array $params, Smarty_Internal_Template $template): string
 {
     /** @var MessageQueue $messageQueue */
-    $messageQueue = getContainer()->get(MessageQueue::class);
+    $messageQueue = getDIContainer()->get(MessageQueue::class);
 
     $html = '';
 
@@ -30,6 +31,7 @@ function smarty_function_messages(array $params, Smarty_Internal_Template $templ
 
     $messageQueue->clear();
 
-    return $html;
+    return $html;namespace KaiBoerner\MovieDb;
+
 }
 
