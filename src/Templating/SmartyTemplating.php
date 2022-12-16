@@ -5,7 +5,7 @@ namespace KaiBoerner\MovieDb\Templating;
 /**
  * loose coupling of smarty templating
  */
-final class SmartyTemplateEngine implements TemplateEngine
+final class SmartyTemplating implements TemplatingInterface
 {
     public function __construct(private \Smarty $smarty)
     {}

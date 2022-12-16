@@ -9,10 +9,8 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\ORMSetup;
 use KaiBoerner\MovieDb\{Application, ApplicationInterface};
 use KaiBoerner\MovieDb\Security\{Security, SecurityInterface};
-use KaiBoerner\MovieDb\Templating\TemplateEngine;
-use KaiBoerner\MovieDb\Templating\SmartyTemplateEngine;
-use KaiBoerner\MovieDb\Util\MessageQueue;
-use KaiBoerner\MovieDb\Util\SessionMessageQueue;
+use KaiBoerner\MovieDb\Templating\{SmartyTemplating, TemplatingInterface};
+use KaiBoerner\MovieDb\Util\{MessageQueue, SessionMessageQueue};
 use Psr\Container\ContainerInterface;
 use Smarty;
 use function DI\get;
@@ -46,5 +44,5 @@ return [
         return $smarty;
     },
 
-    TemplateEngine::class => get(SmartyTemplateEngine::class)
+    TemplatingInterface::class => get(SmartyTemplating::class)
 ];

@@ -4,7 +4,7 @@ namespace KaiBoerner\MovieDb\Controller;
 
 use KaiBoerner\MovieDb\ApplicationInterface;
 use KaiBoerner\MovieDb\Security\SecurityInterface;
-use KaiBoerner\MovieDb\Templating\TemplateEngine;
+use KaiBoerner\MovieDb\Templating\TemplatingInterface;
 use KaiBoerner\MovieDb\Util\MessageQueue;
 
 /**
@@ -16,7 +16,7 @@ final class SecurityController
         private ApplicationInterface $application,
         private MessageQueue $messageQueue,
         private SecurityInterface $security,
-        private TemplateEngine $templateEngine
+        private TemplatingInterface $templating
     )
     {}
 
@@ -30,7 +30,7 @@ final class SecurityController
             }
             $this->messageQueue->addErrorMessage("Ihre Anmeldung ist fehlgeschlagen.");
         }
-        $this->templateEngine->render('security/login.html');
+        $this->templating->render('security/login.html');
     }
 
     public function logoutAction(): void

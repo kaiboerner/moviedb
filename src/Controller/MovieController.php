@@ -6,7 +6,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use KaiBoerner\MovieDb\ApplicationInterface;
 use KaiBoerner\MovieDb\Entity\Movie;
 use KaiBoerner\MovieDb\Security\SecurityInterface;
-use KaiBoerner\MovieDb\Templating\TemplateEngine;
+use KaiBoerner\MovieDb\Templating\TemplatingInterface;
 use KaiBoerner\MovieDb\Util\MessageQueue;
 
 /**
@@ -19,7 +19,7 @@ final class MovieController
         private EntityManagerInterface $entityManager,
         private MessageQueue $messageQueue,
         private SecurityInterface $security,
-        private TemplateEngine $templateEngine
+        private TemplatingInterface $templating
     )
     {}
 
@@ -93,7 +93,7 @@ final class MovieController
             }
         }
         
-        $this->templateEngine->render('movie/edit.html', ['movie' => $movie]);
+        $this->templating->render('movie/edit.html', ['movie' => $movie]);
     }
 
     public function newAction(): void
@@ -118,7 +118,7 @@ final class MovieController
             }
         }
         
-        $this->templateEngine->render('movie/new.html', ['movie' => $movie]);
+        $this->templating->render('movie/new.html', ['movie' => $movie]);
     }
 
 }

@@ -5,7 +5,7 @@ namespace KaiBoerner\MovieDb\Controller;
 use Doctrine\ORM\EntityManagerInterface;
 use KaiBoerner\MovieDb\Entity\Movie;
 use KaiBoerner\MovieDb\Security\SecurityInterface;
-use KaiBoerner\MovieDb\Templating\TemplateEngine;
+use KaiBoerner\MovieDb\Templating\TemplatingInterface;
 
 /**
  * Controller for list of movies
@@ -17,7 +17,7 @@ final class IndexController
     public function __construct(
         private EntityManagerInterface $entityManager,
         private SecurityInterface $security,
-        private TemplateEngine $templateEngine
+        private TemplatingInterface $templating
     )
     {}
 
@@ -35,6 +35,6 @@ final class IndexController
             ->getQuery()
             ->getResult()
         ;
-        $this->templateEngine->render('index/index.html', $templateVars);
+        $this->templating->render('index/index.html', $templateVars);
     }
 }
