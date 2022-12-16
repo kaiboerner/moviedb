@@ -1,8 +1,11 @@
 <?php
 
+/** 
+ *  return the config used by php-di
+ */
+
 namespace KaiBoerner\MovieDb;
 
-# return the config used by php-di
           
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
@@ -10,15 +13,15 @@ use Doctrine\ORM\ORMSetup;
 use KaiBoerner\MovieDb\{Application, ApplicationInterface};
 use KaiBoerner\MovieDb\Security\{Security, SecurityInterface};
 use KaiBoerner\MovieDb\Templating\{SmartyTemplating, TemplatingInterface};
-use KaiBoerner\MovieDb\Util\{MessageQueue, SessionMessageQueue};
-use Psr\Container\ContainerInterface;
+use KaiBoerner\MovieDb\Util\{MessageQueueInterface, SessionMessageQueue};
 use Smarty;
+
 use function DI\get;
 
 return [
     ApplicationInterface::class => get(Application::class),
     
-    EntityManager::class => function (ContainerInterface $container): EntityManagerInterface {
+    EntityManager::class => function (): EntityManagerInterface {
         $paths = [ 'src/Entity' ];
         $isDevMode = 'prod' !== APP_ENV;
         $dbParams = [
@@ -31,11 +34,11 @@ return [
 
     EntityManagerInterface::class => get(EntityManager::class),
 
-    MessageQueue::class => get(SessionMessageQueue::class),
+    MessageQueueInterface::class => get(SessionMessageQueue::class),
 
     SecurityInterface::class => get(Security::class),
 
-    Smarty::class => function (ContainerInterface $container): Smarty {
+    Smarty::class => function (): Smarty {
         $smarty = new Smarty();
         $smarty->setCompileDir(DIR_TEMPLATES_C);
         $smarty->setTemplateDir(DIR_TEMPLATES);
