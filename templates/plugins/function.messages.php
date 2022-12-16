@@ -1,14 +1,14 @@
 <?php
 
-use KaiBoerner\MovieDb\Util\MessageQueue;
+use KaiBoerner\MovieDb\Util\MessageQueueInterface;
 use KaiBoerner\MovieDb\Util\MessageType;
 
 use function KaiBoerner\MovieDb\getDIContainer;
 
 function smarty_function_messages(array $params, Smarty_Internal_Template $template): string
 {
-    /** @var MessageQueue $messageQueue */
-    $messageQueue = getDIContainer()->get(MessageQueue::class);
+    /** @var MessageQueueInterface $messageQueue */
+    $messageQueue = getDIContainer()->get(MessageQueueInterface::class);
 
     $html = '';
 

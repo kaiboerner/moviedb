@@ -5,7 +5,7 @@ namespace KaiBoerner\MovieDb\Controller;
 use KaiBoerner\MovieDb\ApplicationInterface;
 use KaiBoerner\MovieDb\Security\SecurityInterface;
 use KaiBoerner\MovieDb\Templating\TemplatingInterface;
-use KaiBoerner\MovieDb\Util\MessageQueue;
+use KaiBoerner\MovieDb\Util\MessageQueueInterface;
 
 /**
  * Controller for login/logout
@@ -14,7 +14,7 @@ final class SecurityController
 {
     public function __construct(
         private ApplicationInterface $application,
-        private MessageQueue $messageQueue,
+        private MessageQueueInterface $messageQueue,
         private SecurityInterface $security,
         private TemplatingInterface $templating
     )

@@ -5,7 +5,7 @@ namespace KaiBoerner\MovieDb\Util;
 /**
  * partial implementation of message queue
  */
-abstract class AbstractMessageQueue implements MessageQueue
+abstract class AbstractMessageQueue implements MessageQueueInterface
 {
     final public function addSuccessMessage(string $message): self
     {

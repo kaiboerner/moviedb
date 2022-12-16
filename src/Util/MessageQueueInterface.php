@@ -5,7 +5,7 @@ namespace KaiBoerner\MovieDb\Util;
 /**
  * interface for a message queue
  */
-interface MessageQueue
+interface MessageQueueInterface
 {
     public function addMessage(Message $message): self;
 

@@ -7,7 +7,7 @@ use KaiBoerner\MovieDb\ApplicationInterface;
 use KaiBoerner\MovieDb\Entity\Movie;
 use KaiBoerner\MovieDb\Security\SecurityInterface;
 use KaiBoerner\MovieDb\Templating\TemplatingInterface;
-use KaiBoerner\MovieDb\Util\MessageQueue;
+use KaiBoerner\MovieDb\Util\MessageQueueInterface;
 
 /**
  * Controller for CRUD of movies
@@ -17,7 +17,7 @@ final class MovieController
     public function __construct(
         private ApplicationInterface $application,
         private EntityManagerInterface $entityManager,
-        private MessageQueue $messageQueue,
+        private MessageQueueInterface $messageQueue,
         private SecurityInterface $security,
         private TemplatingInterface $templating
     )
