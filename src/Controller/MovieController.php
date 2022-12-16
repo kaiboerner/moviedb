@@ -3,7 +3,7 @@
 namespace KaiBoerner\MovieDb\Controller;
 
 use Doctrine\ORM\EntityManagerInterface;
-use KaiBoerner\MovieDb\Application;
+use KaiBoerner\MovieDb\ApplicationInterface;
 use KaiBoerner\MovieDb\Entity\Movie;
 use KaiBoerner\MovieDb\Security\SecurityInterface;
 use KaiBoerner\MovieDb\Templating\TemplateEngine;
@@ -15,7 +15,7 @@ use KaiBoerner\MovieDb\Util\MessageQueue;
 final class MovieController
 {
     public function __construct(
-        private Application $application,
+        private ApplicationInterface $application,
         private EntityManagerInterface $entityManager,
         private MessageQueue $messageQueue,
         private SecurityInterface $security,

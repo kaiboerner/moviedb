@@ -2,12 +2,16 @@
 
 namespace KaiBoerner\MovieDb;
 
+use Psr\Container\ContainerInterface;
 
 /**
- * entry point of the moviedb application
+ * {@inheritDoc}
  */
-final class Application
+final class Application implements ApplicationInterface
 {
+    public function __construct(private ContainerInterface $container)
+    {}
+
     private function getActionMethod(string $action): string
     {
         $action = lcfirst(implode('', array_map('ucfirst', preg_split('/[^a-z0-9]/', strtolower($action)))));
@@ -15,12 +19,12 @@ final class Application
         return $action . 'Action';
     }
 
-    public function getController(string $controllerName): object
+    private function getController(string $controllerName): object
     {
-        return getContainer()->get($this->getControllerClass($controllerName));
+        return $this->container->get($this->getControllerClass($controllerName));
     }
 
-    public function getControllerClass(string $controllerName): string
+    private function getControllerClass(string $controllerName): string
     {
         $controllerName = implode('', array_map('ucfirst', preg_split('/[^a-z0-9]/', strtolower($controllerName))));
 
@@ -33,6 +37,9 @@ final class Application
         return $controllerClass;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function redirect(string $controllerName, string $action): void
     {
         $controller = $this->getController($controllerName);
@@ -46,6 +53,9 @@ final class Application
         exit();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function run(string $controllerName, string $action): void
     {
         $controller = $this->getController($controllerName);

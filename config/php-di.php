@@ -7,8 +7,8 @@ namespace KaiBoerner\MovieDb;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\ORMSetup;
-use KaiBoerner\MovieDb\Security\Security;
-use KaiBoerner\MovieDb\Security\SecurityInterface;
+use KaiBoerner\MovieDb\{Application, ApplicationInterface};
+use KaiBoerner\MovieDb\Security\{Security, SecurityInterface};
 use KaiBoerner\MovieDb\Templating\TemplateEngine;
 use KaiBoerner\MovieDb\Templating\SmartyTemplateEngine;
 use KaiBoerner\MovieDb\Util\MessageQueue;
@@ -18,6 +18,8 @@ use Smarty;
 use function DI\get;
 
 return [
+    ApplicationInterface::class => get(Application::class),
+    
     EntityManager::class => function (ContainerInterface $container): EntityManagerInterface {
         $paths = [ 'src/Entity' ];
         $isDevMode = 'prod' !== APP_ENV;
