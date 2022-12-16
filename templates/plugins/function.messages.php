@@ -31,7 +31,7 @@ function smarty_function_messages(array $params, Smarty_Internal_Template $templ
 
     $messageQueue->clear();
 
-    return $html;namespace KaiBoerner\MovieDb;
+    return $html;
 
 }
 
