@@ -4,11 +4,12 @@
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Tools\Console\ConsoleRunner;
 use Doctrine\ORM\Tools\Console\EntityManagerProvider\SingleManagerProvider;
-use function KaiBoerner\MovieDb\getContainer;
+
+use function KaiBoerner\MovieDb\getDIContainer;
 
 require __DIR__ . '/../bootstrap.php';
 
-$entityManager = getContainer()->get(EntityManagerInterface::class);
+$entityManager = getDIContainer()->get(EntityManagerInterface::class);
 
 ConsoleRunner::run(
     new SingleManagerProvider($entityManager)
