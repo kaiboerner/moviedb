@@ -32,10 +32,10 @@
         }
     },
     "scripts": {
-        "auto-scripts": {
-            "./vendor/bin/doctrine-migrations migrations:migrate -n": "script",
-            "chmod a+rwx ./data/moviedb.sqlite": "script"
-        },
+        "auto-scripts": [
+            "./vendor/bin/doctrine-migrations migrations:migrate -n",
+            "chmod -R a+rwx ./data"
+        ],
         "post-install-cmd": [
             "@auto-scripts"
         ],
