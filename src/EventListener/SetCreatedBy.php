@@ -41,9 +41,5 @@ final class SetCreatedBy
         }
 
         $entity->setCreatedBy($user);
-        $this->entityManager->getUnitOfWork()->recomputeSingleEntityChangeSet(
-            $this->entityManager->getClassMetadata(get_class($entity)),
-            $entity
-        );
     }
 }
