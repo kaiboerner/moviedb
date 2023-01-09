@@ -18,7 +18,7 @@ function getDIContainer(): ContainerInterface
         $container = $containerBuilder->build();
 
         // register event listeners
-        foreach (glob(__DIR__ . '/src/EventListener/*.php') as $file) {
+        foreach (glob(PROJECT_ROOT . '/src/EventListener/*.php') as $file) {
             $className = preg_replace('/\\.php$/', '', basename($file));
             $class = new \ReflectionClass("KaiBoerner\\MovieDb\\EventListener\\$className");
             if ($class->isInstantiable()) {
